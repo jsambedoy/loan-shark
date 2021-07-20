@@ -1,0 +1,77 @@
+:root {
+    --primary-color: hsl(271, 40%, 40%);
+    --secondary-color: rgb(0, 255, 55);
+    --dark-color: hsl(240, 64%, 27%);
+    --white-color: whitesmoke;
+}
+
+* {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.logoFont {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 600;
+    font-style: italic;
+}
+
+body {
+    color: var(--dark-color);
+}
+
+nav {
+    background-color: var(--dark-color);
+}
+
+footer {
+    background-color:  var(--dark-color);;
+}
+
+h1, h2, h3, h4, h5, h6{
+    color:  var(--primary-color);;
+}
+
+footer {
+    padding-right: 1rem;
+}
+
+footer .social>a {
+    color: var(--white-color);
+    opacity: 0.75;
+}
+
+footer .social>a:hover {
+    opacity: 0.9;
+    color: var(--secondary-color);
+}
+
+.bsicon {
+    color: rgb(130, 20, 255);
+}
+
+.jsicon {
+    color: hsl(60, 100%, 44%);
+}
+
+.html5icon {
+    color: hsl(20, 100%, 50%)
+}
+
+.cssicon {
+    color: hsl(221, 100%, 65%);
+}
+
+.checklist >li i {
+    color: var(--secondary-color);
+}
+
+code[class*="language-"],
+        pre[class*="language-"] {
+            white-space: pre-wrap;
+            word-break: break-all;
+            word-wrap: break-word;
+        }
+
+main>.container {
+    padding: 60px 15px 0;
+}
