@@ -26,7 +26,7 @@
     <!-- === Nav Section === -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand logoFont" href="index.html"> <img src="/img/logos/logo_TGB.PNG" alt="JSB WEB DEV" class="d-inline-block align-text-center px-2" height="28"> APP NAME</a>
+        <a class="navbar-brand logoFont" href="index.html"> <img src="/img/JSB-1.png" alt="JSB WEB DEV" class="d-inline-block align-text-center px-2" height="28">Loan Shark</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -43,10 +43,10 @@
                     <a class="nav-link active" href="code.html">The Code</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" target="_blank" href="#">Git Repo</a>
+                    <a class="nav-link" target="_blank" href="https://github.com/jsambedoy/loan-shark">Git Repo</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" target="_blank" href="#">About</a>
+                    <a class="nav-link" target="_blank" href="https://jsbwebdev.netlify.app/">About</a>
                 </li>
             </ul>
         </div>
@@ -55,21 +55,108 @@
     <!-- === Main Section === -->
     <main class="flex-shrink-0">
         <div class="container py-4 px-5 mt-5">
-            <h2 class="border-1 border-bottom border-dark">The Code for APP NAME</h2>
-            <div class="row row-cols-1 row-cols-lg-2">
+            <h2 class="border-1 border-bottom border-dark">The Code for Loan Shark</h2>
+            <div class="row">
                 <div class="col-lg-8">
                     <pre class="line-numbers"><code class="language-javascript">
-                        //Call Hello World
-                        function helloWorld() {
-                            alert("hello world")
-                        }
+//get values
+function getValues(){
+
+    //get values from the page
+    let loanAmount = document.getElementById("loanAmount").value;
+    let payments = document.getElementById("payments").value;
+    let rate = document.getElementById("rate").value;
+    let paymentArray = loanCalculator(loanAmount, payments, rate);
+        //call displayData and write the values to the screen
+        displayData(paymentArray, payments);
+}
+//calculate loan
+function loanCalculator(loanAmount, payments, rate){
+    
+    
+
+    let month = 0;
+    let payment = 0;
+    let principal = 0;
+    let interest = 0;
+    let totalInterest = 0;
+    let balance = loanAmount;
+    let paymentArray = [];
+
+
+    //calculate monthly payments
+    for (let i = 1; i <= payments; i++)  {
+        month = i;
+
+        payment = (loanAmount) * (rate/1200) / (1-(1 + rate/1200)**(-payments));
+        let paymentSh = payment.toFixed(2);
+
+        interest = balance * rate/1200;
+        let interestS = interest.toFixed(2);
+
+        totalInterest = totalInterest + interest;
+        totalInterest = parseFloat(totalInterest);
+        let totalInterestS = totalInterest.toFixed(2);
+
+        principal = payment - interest;
+        let  principalS = principal.toFixed(2);
+
+        balance = balance - principal;
+        let balanceS = balance.toFixed(2);
+
+        paymentArray.push(month, paymentSh, principalS, interestS, totalInterestS, balanceS);
+
+        
+
+
+        /*paymentArray.push(month);
+        paymentArray.push(payment);
+        paymentArray.push(principal);
+        paymentArray.push(interest);
+        paymentArray.push(totalInterest);
+        paymentArray.push(balance);*/
+    }
+    return paymentArray;
+}
+
+//display payments
+function displayData(paymentArray) {
+
+    //get the table body element fromt he page
+    let tableBody = document.getElementById("results");
+
+    //get the template row
+    let templateRow = document.getElementById("fbTemplate");
+
+    //clear table first
+    tableBody.innerHtml = "";
+    
+    for (let index = 0; index < paymentArray.length; index += 6) {
+
+        let tableRow = document.importNode(templateRow.content, true);
+
+        //grab just the td's and put into array
+        let rowCols = tableRow.querySelectorAll("td");
+
+        rowCols[0].textContent = paymentArray[index];
+        
+        rowCols[1].textContent = paymentArray[index+1];
+
+        rowCols[2].textContent = paymentArray[index+2];
+        
+        rowCols[3].textContent = paymentArray[index+3];
+        
+        rowCols[4].textContent = paymentArray[index+4];
+
+        rowCols[5].textContent = paymentArray[index+5];
+
+        tableBody.appendChild(tableRow);
+        
+    }
+
+}
                     </code>
                     </pre>
-                </div>
-                <div class="col-lg-4">
-                    <p>The Code is structed in one function.</p>
-                    <h5>Hello World</h5>
-                    <p>Hello World is a function that displays an alert with a message of "Hello World".</p>
                 </div>
             </div>
         </div>
@@ -90,7 +177,6 @@
                     <div class="row">
                         <div class="col social"><a href="https://www.linkedin.com/in/jsambed/" target="_blank"><i class="fa fa-linkedin fa-2x"></i></a></div>
                         <div class="col social"><a href="https://github.com/jsambedoy" target="_blank"><i class="fa fa-github fa-2x"></i></a></div>
-                        <div class="col social"><a href="https://twitter.com/JSB_WEB_DEV" target="_blank"><i class="fa fa-twitter fa-2x"></i></a></div>
                     </div>
                 </div>
             </div>
